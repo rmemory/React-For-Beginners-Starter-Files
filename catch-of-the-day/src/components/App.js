@@ -12,11 +12,7 @@ class App extends React.Component {
 		return (
 			<div className="catch-of-the-day">
 				<div className="menu">
-					{/* Make our own prop with, which we call
-						tagline. Note that any prop that isn't
-						a string must be surrounded by curly 
-						brackets, like the value 500 */}
-					<Header tagline="Fresh Seafood Market" age={500}/>
+					<Header tagline="Fresh Seafood Market"/>
 				</div>
 				<Order />
 				<Inventory />
