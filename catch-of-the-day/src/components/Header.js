@@ -13,7 +13,13 @@ class Header extends React.Component {
 					Day
 				</h1>
 				<h3 className="tagline">
-					<span>Fresh Daily</span>
+					{/* We want to make "Fresh Seafood Market" dynamic 
+						Note that usage of "this", which is a Header
+						JS object. In the Chrome tools, react tab, 
+						if you click on a component (like Header), 
+						and then go the console, and type $r, you will
+						see the entire object */}
+					<span>{this.props.tagline}</span>
 				</h3>
 			</header>
 		)
