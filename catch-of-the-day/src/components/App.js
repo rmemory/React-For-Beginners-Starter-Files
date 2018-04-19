@@ -3,6 +3,7 @@ import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
 import fishes from '../sample-fishes';
+import Fish from './Fish';
 
 /*
  * Note that each component, such as Header, Order, Inventory, etc
@@ -64,6 +65,9 @@ class App extends React.Component {
 						a Prop which is passed to children, in this case
 						Header */}
 					<Header tagline="Fresh Seafood Market"/>
+					<ul className="fishes">
+						{Object.keys(this.state.fishes).map(key => <Fish key={key} details={this.state.fishes[key]} />)}
+					</ul>
 				</div>
 				<Order />
 				<Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}/>
