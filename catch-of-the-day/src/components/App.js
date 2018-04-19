@@ -53,9 +53,39 @@ class App extends React.Component {
 		});
 	};
 
+	// A state function to populate the fishes with default data
 	loadSampleFishes = () => {
 		this.setState({fishes: fishes});
 	};
+
+	// A state function to modify the order state
+	/* To manually call this (or any other method) to test it, you
+	 * can use the chrome tools. First, in the React tab, select 
+	 * in this case the App component, which initializes the $r
+	 * to point at the App. Next, in the console, you can type this:
+	 * 
+	 * $r.addToOrder('fish1');
+	 * $r.addToOrder('fish1');
+	 * $r.addToOrder('fish4');
+	 * 
+	 * Switch back the React tab, and in the order state var of App, you
+	 * will see fish1 has a value of 2 (because we added fish1 twice above)
+	 * and fish4 has a value of 1.
+	 */ 
+	addToOrder = (key) => {
+		// 1. Copy order state
+		const copyOfOrder = { ...this.state.order };
+
+		// 2. Either add to the order, or update the number in our order
+		copyOfOrder[key] = copyOfOrder[key] + 1 || 1; // if the order[key] value doesn't already 
+										  // exist, then initialize its value to 1, 
+										  // otherwise increment the order[key] by 1.
+
+		// 3. Call setState to update our order state object
+		this.setState({
+			order: copyOfOrder
+		});
+	}
 
 	render() {
 		return (
@@ -66,7 +96,21 @@ class App extends React.Component {
 						Header */}
 					<Header tagline="Fresh Seafood Market"/>
 					<ul className="fishes">
-						{Object.keys(this.state.fishes).map(key => <Fish key={key} details={this.state.fishes[key]} />)}
+						{/* We have to use a map operation here because React
+							doesn't provide any looping or conditional logic */}
+						{/* React wants us to apply a key= here in order to make 
+							each Fish be unique (so that it makes things nice and
+							performant), and we just assign a value to key of {key}
+							because the {key} is already guaranteed to be unique. */}
+						{/* props: details, addToOrder function, keyForAddToOrder */}
+						{Object.keys(this.state.fishes).map(key => (
+							<Fish 
+								key={key} 
+								details={this.state.fishes[key]} 
+								addToOrder={this.addToOrder} 
+								keyForAddToOrder={key}/>
+							)
+						)}
 					</ul>
 				</div>
 				<Order />
