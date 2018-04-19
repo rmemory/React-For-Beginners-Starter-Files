@@ -1,6 +1,11 @@
 import React from 'react';
 
-/* Stateless functional component */
+/* 
+ * Stateless functional component 
+ * 
+ * Since only the render method is needed, we can eliminate it altogether,
+ * an simply create a function, called Header
+ */
 const Header = (props) => (
 		<header className="top">
 			<h1>
@@ -12,6 +17,7 @@ const Header = (props) => (
 				Day
 			</h1>
 			<h3 className="tagline">
+				{/* The string for props.tagline comes from App.js */}
 				<span>{props.tagline}</span>
 			</h3>
 		</header>
