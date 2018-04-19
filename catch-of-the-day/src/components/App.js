@@ -4,6 +4,7 @@ import Order from './Order';
 import Inventory from './Inventory';
 import fishes from '../sample-fishes';
 import Fish from './Fish';
+import base from '../base';
 
 /*
  * Note that each component, such as Header, Order, Inventory, etc
@@ -23,6 +24,19 @@ class App extends React.Component {
 		fishes: {},
 		order: {}
 	};
+
+	// Lifecycle method which fires when the component is mounted 
+	componentDidMount() {
+		this.ref = base.syncState(`${this.props.match.params.storeId}/fishes`, {
+			context: this,
+			state: 'fishes' // the use of 'fishes' here refers to the state var above
+		});
+	}
+
+	// Clear out the database
+	componentWillUnmount() {
+		base.removeBinding(this.ref);
+	}
 
 	/*
 	 * Modify the fishes state variable; Never directly modify a 

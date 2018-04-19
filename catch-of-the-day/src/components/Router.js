@@ -10,6 +10,8 @@ const Router = () => (
 			{/* The switch tries the routes in order until 
 				it finds one that succeeds */}
 			<Route exact path="/" component={StorePicker} />
+			{/* Note that :storeId becomes a prop passed to App,
+				via this.props.match.params.storeId */}
 			<Route exact path="/store/:storeId" component={App} />
 			<Route exact component={NotFound} />
 		</Switch>
