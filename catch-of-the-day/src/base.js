@@ -1,6 +1,8 @@
 import Rebase from 're-base';
 import firebase from 'firebase';
 
+// See the firebase database here: 
+// https://console.firebase.google.com/project/cotd-rmemory/overview
 const firebaseApp = firebase.initializeApp(
 	{
 		apiKey: "AIzaSyAH894Ddjcui6-XHVNMxoqYAmExsSOlxk4",
