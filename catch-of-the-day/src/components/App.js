@@ -27,6 +27,15 @@ class App extends React.Component {
 
 	// Lifecycle method which fires when the component is mounted 
 	componentDidMount() {
+		// Load data from local storage
+		const localStorageRef = localStorage.getItem(this.props.match.params.storeId);
+		if (localStorageRef) {
+			// The opposite of JSON.stringify is JSON.parse
+			this.setState({
+				order: JSON.parse(localStorageRef)
+			});
+		}
+		
 		this.ref = base.syncState(`${this.props.match.params.storeId}/fishes`, {
 			context: this,
 			state: 'fishes' // the use of 'fishes' here refers to the state var above
@@ -36,6 +45,14 @@ class App extends React.Component {
 	// Clear out the database
 	componentWillUnmount() {
 		base.removeBinding(this.ref);
+	}
+
+	/* As soon as user modifies their order (aka, as soon as React performs 
+	   an update) this will run. Usage of JSON.stringify is needed because
+	   localStorage expects a string */
+	componentDidUpdate() {
+		localStorage.setItem(this.props.match.params.storeId, 
+							 JSON.stringify(this.state.order));
 	}
 
 	/*

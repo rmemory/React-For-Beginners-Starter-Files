@@ -5,7 +5,14 @@ class Order extends React.Component {
 	renderOrder = key => {
 		const fish = this.props.fishes[key];
 		const count = this.props.order[key];
-		const isAvailable = (fish.status === 'available');
+		const isAvailable = (fish && (fish.status === 'available'));
+
+		// We add this because the sync from firebase means on a 
+		// page refresh, initially we are still waiting for the fish
+		// information from firebase to populate the fishes state in App
+		// and while this is occuring, it means until that sync happens
+		// the order key might be empty
+		if (!fish) return null;
 
 		if (!isAvailable) {
 			return (
