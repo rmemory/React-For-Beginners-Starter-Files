@@ -113,7 +113,13 @@ class App extends React.Component {
 						)}
 					</ul>
 				</div>
-				<Order />
+				{/* This is the best way */}
+				<Order fishes={this.state.fishes} order={this.state.order}/>
+
+				{/* This is lazy, and might involve passing more props than is necessary,
+					plus it kinda breaks the modularity of the Order component by not
+					specifying each prop that gets passed
+				<Order {...this.state}/> */}
 				<Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}/>
 			</div>
 		)
