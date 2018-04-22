@@ -92,6 +92,14 @@ class App extends React.Component {
 		})
 	}
 
+	deleteFish = (key) => {
+		const copyOfFishes = { ...this.state.fishes };
+		copyOfFishes[key] = null;
+		this.setState({
+			fishes: copyOfFishes
+		})
+	}
+
 	// A state function to populate the fishes with default data
 	loadSampleFishes = () => {
 		this.setState({fishes: fishes});
@@ -126,6 +134,16 @@ class App extends React.Component {
 		});
 	}
 
+	removeFromOrder = (key) => {
+		const copyOfOrder = { ...this.state.order };
+		// Because the order data is local and not firebase, we can just use
+		// regular old delete
+		delete copyOfOrder[key];
+		this.setState({
+			order: copyOfOrder
+		})
+	}
+
 	render() {
 		return (
 			<div className="catch-of-the-day">
@@ -153,7 +171,10 @@ class App extends React.Component {
 					</ul>
 				</div>
 				{/* This is the best way */}
-				<Order fishes={this.state.fishes} order={this.state.order}/>
+				<Order 
+					fishes={this.state.fishes} 
+					order={this.state.order}
+					removeFromOrder={this.removeFromOrder}/>
 
 				{/* This is lazy, and might involve passing more props than is necessary,
 					plus it kinda breaks the modularity of the Order component by not
@@ -162,6 +183,7 @@ class App extends React.Component {
 				<Inventory 
 					addFish={this.addFish} 
 					updateFish={this.updateFish}
+					deleteFish={this.deleteFish}
 					loadSampleFishes={this.loadSampleFishes}
 					fishes={this.state.fishes}/>
 			</div>

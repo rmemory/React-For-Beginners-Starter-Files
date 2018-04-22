@@ -9,13 +9,13 @@ class Inventory extends React.Component {
 				<h2>Inventory</h2>
 
 				{
-					Object.keys(this.props.fishes).map
-						(
+					Object.keys(this.props.fishes).map(
 							key => <EditFishForm 
 								key={key}
 								keyForUpdateFish={key}
 								fish={this.props.fishes[key]}
 								updateFish={this.props.updateFish}
+								deleteFish={this.props.deleteFish}
 								/>
 						)
 				}
