@@ -84,6 +84,14 @@ class App extends React.Component {
 		});
 	};
 
+	updateFish = (key, updatedFish) => {
+		const copyOfFishes = { ...this.state.fishes };
+		copyOfFishes[key] = updatedFish;
+		this.setState({
+			fishes: copyOfFishes
+		})
+	}
+
 	// A state function to populate the fishes with default data
 	loadSampleFishes = () => {
 		this.setState({fishes: fishes});
@@ -151,7 +159,11 @@ class App extends React.Component {
 					plus it kinda breaks the modularity of the Order component by not
 					specifying each prop that gets passed
 				<Order {...this.state}/> */}
-				<Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}/>
+				<Inventory 
+					addFish={this.addFish} 
+					updateFish={this.updateFish}
+					loadSampleFishes={this.loadSampleFishes}
+					fishes={this.state.fishes}/>
 			</div>
 		)
 	}
