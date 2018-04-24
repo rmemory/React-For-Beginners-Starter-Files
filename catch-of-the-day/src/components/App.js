@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
@@ -11,6 +12,10 @@ import base from '../base';
  * internally are created by React as nothing more than JS objects
  */
 class App extends React.Component {
+	static propTypes = {
+		match: PropTypes.object.isRequired,
+	};
+
 	/*
 	 * State is an object that lives in a component (in this case App),
 	 * which itself or children need. We provide APIs in this component

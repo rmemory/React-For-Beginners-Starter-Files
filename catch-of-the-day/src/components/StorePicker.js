@@ -1,7 +1,11 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { getFunName } from "../helpers";
 
 class StorePicker extends React.Component {
+	static propTypes = {
+		history: PropTypes.object.isRequired,
+	};
 
 	/* The constructor is needed to bind "this" to the goToStore
 	   or other custom methods in this class */
