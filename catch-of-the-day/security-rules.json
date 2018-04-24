@@ -2,10 +2,13 @@
 {
   "rules": {
     // won't let people delete an existing room
+    // If the data already exists, only the owner can change it, and other users
+    // cannot load the data twice.
     ".write": "!data.exists()",
     ".read": true,
+    // $room is a wildcard that will match anything a second level deep
     "$room": {
-      // only the store owner can edit the data
+      // only the store owner can edit the data (ie. only owner can write a second level)
       ".write":
         "auth != null && (!data.exists() || data.child('owner').val() === auth.uid)",
       ".read": true
